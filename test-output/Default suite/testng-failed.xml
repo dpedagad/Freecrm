@@ -5,9 +5,11 @@
     <classes>
       <class name="com.crm.qa.testcases.LoginPageTest">
         <methods>
+          <include name="LogoImgTest"/>
           <include name="setUp"/>
           <include name="tearDown"/>
           <include name="LoginTest"/>
+          <include name="LoginPageTitleTest"/>
         </methods>
       </class> <!-- com.crm.qa.testcases.LoginPageTest -->
     </classes>

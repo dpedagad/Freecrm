@@ -9,6 +9,9 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 	
@@ -18,7 +21,7 @@ public class TestBase {
 	public TestBase() {
 	try {
 		 prop = new Properties();
-		FileInputStream fis = new FileInputStream("C:\\Users\\user\\eclipse-workspace\\Freecrm\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
+		FileInputStream fis = new FileInputStream("D:\\Automation\\freecrm\\Freecrm\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
 		prop.load(fis);
 	}catch(FileNotFoundException e){
 		e.printStackTrace();
@@ -30,11 +33,11 @@ public class TestBase {
 	public static void Initialization() {
 		String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "E:/Automation/chromedriver_win32/chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		}
 		else if(browserName.equals("Firefox")) {
-			System.setProperty("webdriver.gecko.driver", "E:/Automation/geckodriver-v0.23.0-win64/geckodriver.exe");
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
 		
