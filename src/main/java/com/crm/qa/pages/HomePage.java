@@ -27,4 +27,13 @@ public class HomePage extends TestBase {
 	public String verifyHomePageTitle() {
 		return driver.getTitle();
 	}
+	
+	public Boolean verifyUsername() {
+		return userNameLabel.isDisplayed();
+	}
+	
+	public Contacts clickOnContacts() {
+		ContactsLink.click();
+		return new Contacts();
+	}
 }
