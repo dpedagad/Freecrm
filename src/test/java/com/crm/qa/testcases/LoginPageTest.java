@@ -13,6 +13,13 @@ import com.crm.qa.pages.LoginPage;
 
 public class LoginPageTest extends TestBase{
 	
+	
+	//Test cases should be independant with eachother
+	//Before each test case launch the browser and login
+	//@Test -- Execute the test case
+	//After each test case close the browser
+	//This is to decrease the load on the browser 
+	
 	LoginPage loginpage;
 	HomePage homepage;
 	
