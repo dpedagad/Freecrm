@@ -16,48 +16,45 @@ import com.crm.qa.pages.HomePage;
 import com.crm.qa.pages.LoginPage;
 import com.crm.qa.util.TestUtil;
 
-public class HomePageTest extends TestBase{
+public class ContactsPageTest extends TestBase {
 	
-	HomePage homePage;
 	LoginPage loginPage;
-	TestUtil testutil;
+	HomePage homePage;
 	ContactsPage contactsPage;
-	public HomePageTest() {
+	TestUtil testutil;
+	
+	
+	
+	public ContactsPageTest(){
 		super();
 	}
-	
+
 	@Parameters("browserName")
 	@BeforeMethod
 	public void setUp(String browserName) throws InterruptedException{
-		Initialization(browserName);		
+		Initialization(browserName);
 		loginPage = new LoginPage();
 		homePage = loginPage.Login_Verification(prop.getProperty("username"), prop.getProperty("password"));
-		testutil = new TestUtil();
-		contactsPage = new ContactsPage();
+		driver.switchTo().frame("mainpanel");
+		contactsPage = homePage.clickOnContacts();		
 	}
 	
 	@Test(priority=1)
-	public void verifyHomePageTitleTest(){
-		String homePageTitle = homePage.verifyHomePageTitle();
-		Assert.assertEquals(homePageTitle, "CRMPRO", "Title didn't match");
+	public void VerifyContactsLabelTest() {
+		Assert.assertTrue(contactsPage.VerifyContactsLabel(), "Contacts label is not displayed");
 	}
 	
-	@Test(dependsOnMethods ={"verifyHomePageTitleTest"},priority=2)
-	public void verifyUsernameTest() {
-		testutil.switchToFrame("mainpanel");
-		Assert.assertTrue(homePage.verifyUsername(), "Username is incorrect");
-	}
-	
-	@Test(dependsOnMethods ={"verifyHomePageTitleTest"}, priority=3)
-	public void verifyContactslinkTest() {
-		testutil.switchToFrame("mainpanel");
-		contactsPage =	homePage.clickOnContacts();		
+	@Test(priority=2)
+	public void SelectNewContact() {
+		contactsPage.SelectNewContact();
 		loginPage.Logout();
 	}
 	
+
 	@AfterMethod
 	public void tearDown(){
 		
 		driver.quit();
 	}
+	
 }

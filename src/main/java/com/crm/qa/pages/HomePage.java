@@ -32,8 +32,8 @@ public class HomePage extends TestBase {
 		return userNameLabel.isDisplayed();
 	}
 	
-	public Contacts clickOnContacts() {
+	public ContactsPage clickOnContacts() {
 		ContactsLink.click();
-		return new Contacts();
+		return new ContactsPage();
 	}
 }

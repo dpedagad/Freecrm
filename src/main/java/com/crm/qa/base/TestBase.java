@@ -7,9 +7,13 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.FindBy;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Parameters;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -30,15 +34,15 @@ public class TestBase {
 	}
 	}
 	
-	public static void Initialization() {
-		String browserName = prop.getProperty("browser");
+	public static void Initialization(String browserName) {
+		//String browserName = prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		}
-		else if(browserName.equals("Firefox")) {
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
+		else if(browserName.equals("IE")) {
+			WebDriverManager.iedriver().setup();
+			driver = new InternetExplorerDriver();
 		}
 		
 		driver.manage().window().maximize();
@@ -48,5 +52,6 @@ public class TestBase {
 				
 		driver.get(prop.getProperty("url"));
 	}
+	
 	
 }

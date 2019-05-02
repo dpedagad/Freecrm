@@ -1,10 +1,12 @@
 package com.crm.qa.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.crm.qa.base.TestBase;
 
@@ -21,10 +23,13 @@ public class LoginPage extends TestBase {
 	WebElement LOGIN;
 	
 	@FindBy(xpath="//font[contains(text(), 'Sign Up')]")
-	WebElement SIGNUP;
+	WebElement SIGNUP;	
 	
-	@FindBy(xpath="//img[contains(@class, 'img-responsive') and @alt='free crm logo']")
+	@FindBy(xpath="//td[@width='525' and  @class='logo_text']")
 	WebElement CRMLOGO;
+	
+	@FindBy(xpath="//a[contains(text(),'Logout')]")
+	WebElement LOGOUT;
 	
 	public LoginPage() {
 		PageFactory.initElements(driver, this);
@@ -47,5 +52,13 @@ public class LoginPage extends TestBase {
 	public Boolean Logo_Validation() {
 		return CRMLOGO.isDisplayed();
 	}
+	
+	public void Logout() {
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click()", LOGOUT);
+		Assert.assertEquals(driver.getTitle(), "CRMPRO  - CRM software for customer relationship management, sales, and support.");
+		
+	}
+	
 	
 }
